@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACME Grilled Cheese</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: #f8f8f8; 
+            margin: 0; 
+            padding: 0; 
+        }
+        .container { 
+            width: 60%; 
+            margin: auto; 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: #ffcc00; 
+            padding: 15px; 
+            font-size: 24px; 
+            font-weight: bold; 
+            border-radius: 10px 10px 0 0;
+        }
+        .comment-section { 
+            margin-top: 20px; 
+            text-align: left;
+        }
+        .comment-box { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin-top: 5px; 
+            background: #fff3cd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #cc5200;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">ACME Grilled Cheese Sandwich Company</div>
+        <h1>Delicious Grilled Cheese</h1>
+        <p>To make the perfect grilled cheese, follow these simple steps:</p>
+        <ol>
+            <li>Butter two slices of bread.</li>
+            <li>Place a slice of cheese between them.</li>
+            <li>Grill on medium heat until golden brown.</li>
+            <li>Enjoy!</li>
+        </ol>
+        
+        <div class="comment-section">
+            <h2>Leave a Comment</h2>
+            <input type="text" id="commentInput" placeholder="Enter your comment...">
+            <button onclick="submitComment()">Submit</button>
+            <div id="comments"></div>
+        </div>
+    </div>
+
+    <script>
+        function submitComment() {
+            var comment = document.getElementById("commentInput").value;
+            var commentBox = document.createElement("div");
+            commentBox.className = "comment-box";
+            commentBox.innerHTML = comment; // Vulnerable to XSS!
+            document.getElementById("comments").appendChild(commentBox);
+        }
+    </script>
+</body>
+</html>
